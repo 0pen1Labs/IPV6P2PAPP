@@ -2,8 +2,6 @@ import {View} from 'react-native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import React, {useEffect} from 'react';
 import {RootStackParamList} from '../navigation/RootNavigator';
-import {useAppDispatch, useAppSelector} from '../hooks/useReduxHooks';
-import {setTemp} from '../redux/slices/TempSlice';
 import TopBar from '../components/TopBar';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
@@ -13,7 +11,7 @@ const HomeScreen = ({navigation}: Props) => {
   useEffect(() => {}, []);
 
   return (
-    <View className="h-full bg-black">
+    <View className="h-full bg-slate-50 dark:bg-black">
       <TopBar />
     </View>
   );
