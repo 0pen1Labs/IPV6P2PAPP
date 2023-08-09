@@ -1,11 +1,11 @@
-import {View, Text, Image, Pressable} from 'react-native';
+import { View, Text, Image, Pressable } from 'react-native';
 import React from 'react';
-import {APP_NAME} from '../constants/AppConstants';
+import { APP_NAME } from '../constants/AppConstants';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import {useAppSelector} from '../hooks/useReduxHooks';
 
 type Props = {
   title?: string;
+  appTheme: string;
 };
 
 const handleMainlogoClick = () => {
@@ -16,10 +16,7 @@ const handleMenuClick = () => {
   console.log('Menu clicked');
 };
 
-const TopBar = ({title}: Props) => {
-  const appTheme = useAppSelector(
-    state => state.persistedReducer.appSetting.theme,
-  );
+const TopBar = ({title, appTheme}: Props) => {
 
   return (
     <View className="w-full flex-row items-start justify-center border-b border-gray-200 p-4 drop-shadow-md dark:border-gray-700">
