@@ -1,36 +1,58 @@
-import {View, Text, Button} from 'react-native';
+import {View} from 'react-native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import React, {useEffect} from 'react';
 import {RootStackParamList} from '../navigation/RootNavigator';
-import {useAppDispatch, useAppSelector} from '../hooks/useReduxHooks';
-import {setTemp} from '../redux/slices/TempSlice';
+import LottieView from 'lottie-react-native';
+import Animated, {
+  useAnimatedStyle,
+  withTiming,
+  withDelay,
+  withSequence,
+} from 'react-native-reanimated';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Splash'>;
-const title = 'Splash Screen';
 
 const SplashScreen = ({navigation}: Props) => {
-  const screenName = useAppSelector(
-    state => state.persistedReducer.temp.screenName,
-  );
-  const dispatch = useAppDispatch();
+  const animatedStyle = useAnimatedStyle(() => ({
+    opacity: withSequence(withTiming(0), withDelay(500, withTiming(1))),
+  }));
 
   useEffect(() => {
-    dispatch(setTemp(title));
+    setTimeout(() => {
+      navigation.replace('Home');
+    }, 3000);
   }, []);
 
-  const handleOnPress = () => {
-    navigation.navigate('Home');
-  };
-
   return (
-    <View className="h-full items-center justify-center">
-      <Text className="w-full text-center text-lg text-gray-700">
-        {`Hello, Welcome to new world :)`}
-      </Text>
-      <Text className="w-full text-center text-lg text-gray-700">
-        {`screen name: ${screenName}`}
-      </Text>
-      <Button onPress={handleOnPress} title="Go to home" color={'indigo'} />
+    <View className="relative flex-grow">
+      <LottieView
+        style={{flex: 1}}
+        source={require('../assets/splash1.json')}
+        autoPlay
+        loop={false}
+        resizeMode="cover"
+      />
+      <View className="absolute z-0 h-full w-full items-center justify-center bg-transparent">
+        <Animated.Image
+          source={require('../assets/logo.png')}
+          style={[
+            {
+              backgroundColor: 'transparent',
+              width: 400,
+              height: 400,
+            },
+            animatedStyle,
+          ]}
+        />
+      </View>
+
+      <View className="absolute bottom-6 left-2/4 right-2/4 z-10 items-center justify-center bg-transparent">
+        <Animated.Image
+          style={[animatedStyle]}
+          source={require('../assets/main_logo.png')}
+          className="h-9 w-40"
+        />
+      </View>
     </View>
   );
 };

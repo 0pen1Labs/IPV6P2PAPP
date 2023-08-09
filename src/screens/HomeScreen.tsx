@@ -18,10 +18,6 @@ const HomeScreen = ({navigation}: Props) => {
     dispatch(setTemp(title));
   }, []);
 
-  const handleGoBack = () => {
-    navigation.goBack();
-  };
-
   return (
     <View className="h-full items-center justify-center">
       <Text className="w-full text-center text-lg text-gray-800">
@@ -30,7 +26,6 @@ const HomeScreen = ({navigation}: Props) => {
       <Text className="w-full text-center text-lg text-gray-700">
         {`screen name: ${screenName}`}
       </Text>
-      <Button onPress={handleGoBack} title="Go to Back" color={'indigo'} />
     </View>
   );
 };
