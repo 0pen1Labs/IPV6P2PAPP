@@ -1,9 +1,7 @@
-import {View, Text, Button} from 'react-native';
+import {View} from 'react-native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import React, {useEffect} from 'react';
 import {RootStackParamList} from '../navigation/RootNavigator';
-import {useAppDispatch, useAppSelector} from '../hooks/useReduxHooks';
-import {setTemp} from '../redux/slices/TempSlice';
 import LottieView from 'lottie-react-native';
 import Animated, {
   useAnimatedStyle,
@@ -16,7 +14,7 @@ type Props = NativeStackScreenProps<RootStackParamList, 'Splash'>;
 
 const SplashScreen = ({navigation}: Props) => {
   const animatedStyle = useAnimatedStyle(() => ({
-    opacity: withSequence(withTiming(0), withTiming(1)),
+    opacity: withSequence(withTiming(0), withDelay(500, withTiming(1))),
   }));
 
   useEffect(() => {
@@ -34,21 +32,26 @@ const SplashScreen = ({navigation}: Props) => {
         loop={false}
         resizeMode="cover"
       />
-      <View className="absolute z-10 h-full w-full items-center justify-center bg-transparent">
-        <Animated.Text
+      <View className="absolute z-0 h-full w-full items-center justify-center bg-transparent">
+        <Animated.Image
+          source={require('../assets/logo.png')}
           style={[
             {
-              fontStyle: 'normal',
-              fontWeight: '600',
-              color: 'white',
-              fontSize: 40,
-              letterSpacing: 0.5,
+              backgroundColor: 'transparent',
+              width: 400,
+              height: 400,
             },
             animatedStyle,
           ]}
-        >
-          IPV6
-        </Animated.Text>
+        />
+      </View>
+
+      <View className="absolute bottom-6 left-2/4 right-2/4 z-10 items-center justify-center bg-transparent">
+        <Animated.Image
+          style={[animatedStyle]}
+          source={require('../assets/main_logo.png')}
+          className="h-9 w-40"
+        />
       </View>
     </View>
   );
