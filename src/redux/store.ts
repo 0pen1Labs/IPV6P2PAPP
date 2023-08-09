@@ -9,7 +9,7 @@ import {
   REHYDRATE,
   persistReducer,
 } from 'redux-persist';
-import TempSlice from './slices/TempSlice';
+import AppSettingsSlice from './slices/AppSettingsSlice';
 
 const persistConfig = {
   key: 'loanApp',
@@ -19,7 +19,7 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   // place your reducers hare
-  temp: TempSlice,
+  appSetting: AppSettingsSlice,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

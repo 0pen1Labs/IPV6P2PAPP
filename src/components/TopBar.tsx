@@ -1,8 +1,8 @@
 import {View, Text, Image, Pressable} from 'react-native';
 import React from 'react';
 import {APP_NAME} from '../constants/AppConstants';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import {useAppSelector} from '../hooks/useReduxHooks';
 
 type Props = {
   title?: string;
@@ -17,26 +17,38 @@ const handleMenuClick = () => {
 };
 
 const TopBar = ({title}: Props) => {
+  const appTheme = useAppSelector(
+    state => state.persistedReducer.appSetting.theme,
+  );
+
   return (
-    <View className="w-full flex-row items-start border-b border-gray-700 p-4  drop-shadow-md">
+    <View className="w-full flex-row items-start justify-center border-b border-gray-200 p-4 drop-shadow-md dark:border-gray-700">
       <Pressable
-        className="h-7 w-7 items-center justify-center p-1"
+        className="h-7 w-7 items-center justify-center"
         onPress={handleMainlogoClick}
       >
         <Image
-          source={require('../assets/logo_icon.png')}
-          className="h-6 w-6"
+          source={
+            appTheme == 'dark'
+              ? require('../assets/logo_icon.png')
+              : require('../assets/logo_icon_light.png')
+          }
+          className="h-6 w-6 mix-blend-multiply contrast-100"
         />
       </Pressable>
-      <Text className="h-full flex-grow text-center text-lg text-gray-200">
+      <Text className="h-7 flex-grow text-center text-lg font-semibold tracking-wider text-gray-900 dark:text-gray-200">
         {APP_NAME}
       </Text>
 
       <Pressable
-        className="h-7 w-7 items-center justify-center p-1"
+        className="h-7 w-7 items-center justify-center"
         onPress={handleMenuClick}
       >
-        <MaterialIcons name="sort" color={'white'} size={24} />
+        <MaterialIcons
+          name="sort"
+          color={appTheme == 'dark' ? 'white' : 'black'}
+          size={24}
+        />
       </Pressable>
     </View>
   );
