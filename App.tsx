@@ -10,6 +10,7 @@ const persistor = persistStore(store);
 // This is to remove selected background pill from react navigation Material-bottom-tab-navigator.
 const bottomNavBarTheme = {
   ...DefaultTheme,
+  roundness: 0,
   colors: {
     ...DefaultTheme.colors,
     notification: 'rgba(255, 255, 255, 0.5)',
