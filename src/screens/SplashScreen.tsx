@@ -19,7 +19,10 @@ const SplashScreen = ({navigation}: Props) => {
 
   useEffect(() => {
     setTimeout(() => {
-      navigation.replace('Home');
+      navigation.replace('BottomStack', {
+        screen: 'HomeStack',
+        params: {screen: 'Home'},
+      });
     }, 3000);
   }, []);
 

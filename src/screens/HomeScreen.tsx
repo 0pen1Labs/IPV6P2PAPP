@@ -1,12 +1,12 @@
 import {ScrollView, View} from 'react-native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import React, {useEffect} from 'react';
-import {RootStackParamList} from '../navigation/RootNavigator';
 import TopBar from '../components/TopBar';
 import {useAppSelector} from '../hooks/useReduxHooks';
 import IPCard from '../components/IPCard';
+import {HomeStackParmList} from '../navigation/HomeNavigator';
 
-type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
+type Props = NativeStackScreenProps<HomeStackParmList, 'Home'>;
 const title = 'Home Screen';
 
 const HomeScreen = ({navigation}: Props) => {
