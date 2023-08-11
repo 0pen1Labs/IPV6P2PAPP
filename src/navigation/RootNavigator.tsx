@@ -5,16 +5,27 @@ import {
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import SplashScreen from '../screens/SplashScreen';
-import HomeScreen from '../screens/HomeScreen';
+import {useAppSelector} from '../hooks/useReduxHooks';
+import {useColorScheme} from 'nativewind';
+import {ColorSchemeSystem} from 'nativewind/dist/style-sheet/color-scheme';
+import BottomNavigator, {BottomNavParam} from './BottomNavigator';
 
 export type RootStackParamList = {
   Splash: undefined;
-  Home: undefined;
+  BottomStack: NavigatorScreenParams<BottomNavParam>;
 };
 
 const RootStack = createNativeStackNavigator<RootStackParamList>();
 
 const RootNavigator = () => {
+  // setting Global App theme
+  const {setColorScheme} = useColorScheme();
+  const appTheme = useAppSelector(
+    state => state.persistedReducer.appSetting.theme,
+  );
+
+  setColorScheme(appTheme as ColorSchemeSystem);
+
   return (
     <NavigationContainer>
       <RootStack.Navigator
@@ -22,7 +33,7 @@ const RootNavigator = () => {
         screenOptions={{headerShown: false}}
       >
         <RootStack.Screen name="Splash" component={SplashScreen} />
-        <RootStack.Screen name="Home" component={HomeScreen} />
+        <RootStack.Screen name="BottomStack" component={BottomNavigator} />
       </RootStack.Navigator>
     </NavigationContainer>
   );

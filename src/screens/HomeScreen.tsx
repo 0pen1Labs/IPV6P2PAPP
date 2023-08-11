@@ -1,31 +1,67 @@
-import {View, Text, Button} from 'react-native';
+import {FlatList, View} from 'react-native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import React, {useEffect} from 'react';
-import {RootStackParamList} from '../navigation/RootNavigator';
-import {useAppDispatch, useAppSelector} from '../hooks/useReduxHooks';
-import {setTemp} from '../redux/slices/TempSlice';
+import React, {useEffect, version} from 'react';
+import TopBar from '../components/TopBar';
+import {useAppSelector} from '../hooks/useReduxHooks';
+import IPCard from '../components/IPCard';
+import {HomeStackParmList} from '../navigation/HomeNavigator';
+import {FAB} from 'react-native-paper';
+import {DummyList} from '../Utils/DummyList';
+import ActivePointCard from '../components/ActivePointCard';
 
-type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
+type Props = NativeStackScreenProps<HomeStackParmList, 'Home'>;
 const title = 'Home Screen';
 
 const HomeScreen = ({navigation}: Props) => {
-  const screenName = useAppSelector(
-    state => state.persistedReducer.temp.screenName,
+  const appTheme = useAppSelector(
+    state => state.persistedReducer.appSetting.theme,
   );
-  const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    dispatch(setTemp(title));
-  }, []);
+  useEffect(() => {}, []);
+
+  const hendleFABClick = () => {};
+
+  const handleOnPointClick = (item: any) => {
+    console.log(item);
+    navigation.navigate('Message');
+  };
 
   return (
-    <View className="h-full items-center justify-center">
-      <Text className="w-full text-center text-lg text-gray-800">
-        {`Hello, Welcome to Home :)`}
-      </Text>
-      <Text className="w-full text-center text-lg text-gray-700">
-        {`screen name: ${screenName}`}
-      </Text>
+    <View className="h-full bg-slate-50 dark:bg-black">
+      <TopBar appTheme={appTheme} />
+      <View className="mt-3 p-2">
+        <IPCard appTheme={appTheme} />
+      </View>
+
+      <FlatList
+        data={DummyList}
+        renderItem={({item}) => (
+          <ActivePointCard
+            name={item.name}
+            message={item.currentMessage}
+            onPress={() => handleOnPointClick(item)}
+          />
+        )}
+        keyExtractor={item => item.key}
+      />
+
+      <View>
+        <FAB
+          icon={'plus'}
+          label="Add"
+          color={`${appTheme == 'dark' ? 'black' : 'gray'}`}
+          uppercase={true}
+          theme={{
+            dark: true,
+            version: 3,
+            colors: {
+              primaryContainer: `${appTheme == 'dark' ? '#D3D3D3' : '#424242'}`,
+            },
+          }}
+          className="right- absolute bottom-0 right-0 m-4"
+          onPress={hendleFABClick}
+        />
+      </View>
     </View>
   );
 };
