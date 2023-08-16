@@ -1,6 +1,6 @@
-import {FlatList, View} from 'react-native';
+import {FlatList, View, Text} from 'react-native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import React, {useEffect, version} from 'react';
+import React, {useEffect, useState} from 'react';
 import TopBar from '../components/TopBar';
 import {useAppSelector} from '../hooks/useReduxHooks';
 import IPCard from '../components/IPCard';

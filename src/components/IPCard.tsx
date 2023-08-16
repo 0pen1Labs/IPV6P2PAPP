@@ -42,8 +42,8 @@ const IPCard = ({appTheme}: Props) => {
           {isEyeOpen ? IPV6 : HIDDEN_IPV6}
         </Text>
       </Pressable>
-      <Text className="mt-2 text-center text-sm font-light tracking-wider">
-        ( Long press to copy )
+      <Text className="mt-2 text-center text-sm font-light tracking-wider text-gray-400">
+        {`( Long press to copy )`}
       </Text>
     </View>
   );

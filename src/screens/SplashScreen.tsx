@@ -1,4 +1,4 @@
-import {View} from 'react-native';
+import {Text, View} from 'react-native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import React, {useEffect} from 'react';
 import {RootStackParamList} from '../navigation/RootNavigator';
@@ -35,26 +35,28 @@ const SplashScreen = ({navigation}: Props) => {
         loop={false}
         resizeMode="cover"
       />
-      <View className="absolute z-0 h-full w-full items-center justify-center bg-transparent">
-        <Animated.Image
-          source={require('../assets/logo.png')}
-          style={[
-            {
-              backgroundColor: 'transparent',
-              width: 400,
-              height: 400,
-            },
-            animatedStyle,
-          ]}
-        />
-      </View>
+      <View className="absolute z-0 h-full w-full bg-transparent">
+        <View className="flex-grow items-center justify-center">
+          <Animated.Image
+            source={require('../assets/logo.png')}
+            style={[
+              {
+                backgroundColor: 'transparent',
+                width: 400,
+                height: 400,
+              },
+              animatedStyle,
+            ]}
+          />
+        </View>
 
-      <View className="absolute bottom-6 left-2/4 right-2/4 z-10 items-center justify-center bg-transparent">
-        <Animated.Image
-          style={[animatedStyle]}
-          source={require('../assets/main_logo.png')}
-          className="h-9 w-40"
-        />
+        <View className="mb-10 items-center justify-center bg-transparent">
+          <Animated.Image
+            style={[animatedStyle]}
+            source={require('../assets/main_logo.png')}
+            className="h-9 w-40"
+          />
+        </View>
       </View>
     </View>
   );
