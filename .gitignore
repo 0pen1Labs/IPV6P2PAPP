@@ -1,3 +1,6 @@
+#ignore RTN Module
+RTNDeviceinfo/
+
 # OSX
 #
 .DS_Store
