@@ -19,7 +19,7 @@ const HomeScreen = ({navigation}: Props) => {
 
   useEffect(() => {}, []);
 
-  const hendleFABClick = () => {};
+  const handleFABClick = () => {};
 
   const handleOnPointClick = (item: any) => {
     console.log(item);
@@ -59,7 +59,7 @@ const HomeScreen = ({navigation}: Props) => {
             },
           }}
           className="right- absolute bottom-0 right-0 m-4"
-          onPress={hendleFABClick}
+          onPress={handleFABClick}
         />
       </View>
     </View>
